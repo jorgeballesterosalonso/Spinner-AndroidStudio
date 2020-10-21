@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * @author Jorge Ballesteros
+ */
 public class MainActivity extends AppCompatActivity {
     operacion op;
     int puntos=0;
