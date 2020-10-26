@@ -71,8 +71,9 @@ public class MainActivity extends AppCompatActivity {
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if ((String.valueOf(etResultado.getText())).equals(String.valueOf(op.getResultado()))){
+            String entrada_usuario=String.valueOf(etResultado.getText());
+            String respuesta =String.valueOf(op.getResultado());
+                if (entrada_usuario.equals(respuesta)){
                     if (ciclo<=4) {
 
                         correccion.setText("Correcto");
