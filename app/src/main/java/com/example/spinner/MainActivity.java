@@ -17,6 +17,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     operacion op;
     int puntos=0;
+    int ciclo=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -62,25 +63,52 @@ public class MainActivity extends AppCompatActivity {
                 signo.setText(String.valueOf(op.getSimbolo()));
                 etResultado.setText("");
                 correccion.setText("");
+                btnjugar.setVisibility(View.INVISIBLE);
+                ciclo++;
             }
         });
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Integer.parseInt(String.valueOf(etResultado.getText()))==op.getResultado()){
-                    correccion.setText("Correcto");
-                    puntos++;
-                    puntuacion.setText(String.valueOf(puntos));
-                    op = new operacion(spn.getSelectedItemPosition());
-                    etNumero1.setText(String.valueOf(op.getNumero1()));
-                    etNumero2.setText(String.valueOf(op.getNumero2()));
-                    signo.setText(String.valueOf(op.getSimbolo()));
-                }else
-                    correccion.setText("Incorrecto");
-                    etResultado.setText("");
-            }
+
+                if ((String.valueOf(etResultado.getText())).equals(String.valueOf(op.getResultado()))){
+                    if (ciclo<=4) {
+
+                        correccion.setText("Correcto");
+                        puntos++;
+                        puntuacion.setText(String.valueOf(puntos));
+                        op = new operacion(spn.getSelectedItemPosition());
+                        etNumero1.setText(String.valueOf(op.getNumero1()));
+                        etNumero2.setText(String.valueOf(op.getNumero2()));
+                        signo.setText(String.valueOf(op.getSimbolo()));
+
+                        ciclo++;
+
+                    }else{
+                        etNumero1.setText("Partida terminada");
+                        etNumero2.setText("");
+                        signo.setText("");
+                        ciclo=0;
+                        btnjugar.setVisibility(View.VISIBLE);
+                    }
+
+                }else{
+                    if (ciclo<=4){
+                        ciclo++;
+                        op = new operacion(spn.getSelectedItemPosition());
+                        etNumero1.setText(String.valueOf(op.getNumero1()));
+                        etNumero2.setText(String.valueOf(op.getNumero2()));
+                        signo.setText(String.valueOf(op.getSimbolo()));
+                        correccion.setText("Incorrecto");
+                        etResultado.setText("");
+                    }else{
+                        ciclo=0;
+                        btnjugar.setVisibility(View.VISIBLE);
+                    }
+            }}
         });
 
     }
+
 }
